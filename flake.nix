@@ -2,16 +2,13 @@
   description = "A template for Nix based C++ project setup.";
 
   inputs = {
-    # Pointing to the current stable release of nixpkgs. You can
-    # customize this to point to an older version or unstable if you
-    # like everything shining.
-    #
-    # E.g.
-    #
-    # nixpkgs.url = "github:NixOS/nixpkgs/unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/23.05";
 
     utils.url = "github:numtide/flake-utils";
+
+    ml-pkgs.url = "github:nixvital/ml-pkgs";
+    ml-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+    ml-pkgs.inputs.utils.follows = "utils";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: inputs.utils.lib.eachSystem [
@@ -21,15 +18,7 @@
   ] (system: let
     pkgs = import nixpkgs {
       inherit system;
-
-      # Add overlays here if you need to override the nixpkgs
-      # official packages.
-      overlays = [];
-      
-      # Uncomment this if you need unfree software (e.g. cuda) for
-      # your project.
-      #
-      # config.allowUnfree = true;
+      overlays = [ inputs.ml-pkgs.overlays.simulators ];
     };
   in {
     devShells.default = pkgs.mkShell rec {
@@ -48,6 +37,7 @@
         # Build time and Run time dependencies
         spdlog
         abseil-cpp
+        mujoco
       ];
 
       # Setting up the environment variables you need during
