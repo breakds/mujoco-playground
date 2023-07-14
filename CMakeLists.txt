@@ -88,7 +88,7 @@ if(ENABLE_INSTALL)
         NO_CHECK_REQUIRED_COMPONENTS_MACRO)
 
     install(
-        TARGETS simple
+        TARGETS testspeed
         EXPORT ${PROJECT_NAME}_Targets
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
