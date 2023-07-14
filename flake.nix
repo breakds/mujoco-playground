@@ -37,6 +37,7 @@
         # Build time and Run time dependencies
         spdlog
         abseil-cpp
+        libGL
         mujoco
       ];
 

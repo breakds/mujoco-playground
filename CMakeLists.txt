@@ -51,6 +51,7 @@ set(${PROJECT_NAME}_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NA
 
 find_package(spdlog REQUIRED)
 find_package(absl REQUIRED)
+find_package(mujoco REQUIRED)
 
 if(ENABLE_TESTING)
     find_package(GTest REQUIRED)
