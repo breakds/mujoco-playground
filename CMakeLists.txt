@@ -12,6 +12,7 @@ project(mujoco-playground
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 if(APPLE)
 add_compile_options(-mmacosx-version-min=10.15)
 endif()
